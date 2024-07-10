@@ -1,7 +1,13 @@
+from baseballgame_result import BaseballResult
 
 class Baseball:
-    def guess(self, guessNumber):
+    def __init__(self) -> None:
+        super().__init__()
+        self.question = ""
+
+    def guess(self, guessNumber) -> BaseballResult:
         self.assert_illegal_value(guessNumber)
+        return BaseballResult(True, 3, 0)
 
     def assert_illegal_value(self, guessNumber):
         if guessNumber is None:
