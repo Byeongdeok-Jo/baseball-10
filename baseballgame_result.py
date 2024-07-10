@@ -11,5 +11,5 @@ class BaseballResult:
     def get_strikes(self):
         return self.__strikes
 
-    def get_ball(self):
+    def get_balls(self):
         return self.__balls

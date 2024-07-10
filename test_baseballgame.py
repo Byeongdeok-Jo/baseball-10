@@ -1,5 +1,6 @@
 from unittest import TestCase
 from baseballgame import Baseball
+from baseballgame_result import BaseballResult
 
 class BaseballTest(TestCase):
     def setUp(self):
@@ -19,11 +20,16 @@ class BaseballTest(TestCase):
         self.assert_illegal_argument("12s")
         self.assert_illegal_argument("121")
 
+    def assert_matched_number(self, result, solved, strikes, balls):
+        self.assertIsNotNone(result)
+        self.assertEqual(solved, result.get_solved())
+        self.assertEqual(strikes, result.get_strikes())
+        self.assertEqual(balls, result.get_balls())
+
     def test_return_solve_result_if_matched_number(self):
         self.game.question = "123"
-        result:GameResult = self.game.guess("123")
+        self.assert_matched_number(self.game.guess("123"), True, 3, 0)
 
-        self.assertIsNotNone(result)
-        self.assertTrue(result.get_solved())
-        self.assertEqual(3, result.get_strikes())
-        self.assertEqual(0, result.get_ball())
+    def test_return_solve_result_if_unmatched_number(self):
+        self.game.question = "123"
+        self.assert_matched_number(self.game.guess("456"), False, 0, 0)
